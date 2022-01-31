@@ -34,7 +34,7 @@ EOL
 echo "Install Depdendencies"
 pip install --upgrade pip
 pip install wheel
-pip install jupyterlab widgetsnbextension jupyter-jsmol nbconvert jupyterlab_latex
+pip install jupyterlab widgetsnbextension jupyter-jsmol nbconvert jupyterlab_latex jupyterlab_tabnine
 pip install z3-solver pwntools pycryptodome
 pip install Pebble scikit-learn tensorflow
 
@@ -50,11 +50,6 @@ source ~/.bashrc
 /home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install @arbennett/base16-monokai
 /home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install @arbennett/base16-gruvbox-dark
 /home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install @arbennett/base16-one-dark
-#tabnine
-pip install jupyter-tabnine --user
-/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter nbextension install --py jupyter_tabnine --user
-/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter nbextension enable --py jupyter_tabnine --user
-/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter serverextension enable --py jupyter_tabnine --user
 
 echo "Setup login directory"
 echo "source ~/.bashrc"  >> /home/vagrant/.bash_profile
