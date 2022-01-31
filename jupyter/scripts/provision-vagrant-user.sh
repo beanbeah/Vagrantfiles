@@ -24,11 +24,16 @@ tar -xvf sage-9.4-Ubuntu_20.04-x86_64.tar.bz2
 cd SageMath
 timeout 2m ./sage
 sudo ln -s /home/vagrant/SageMath/sage /usr/local/bin/sage
-rm -rf sage-9.4-Ubuntu_20.04-x86_64.tar.bz2
+sudo rm -rf sage-9.4-Ubuntu_20.04-x86_64.tar.bz2
 source ~/.bashrc
+cat >/home/vagrant/.sage/init.sage <<EOL
+import os
+os.environ['PWNLIB_NOTERM'] = '1'
+EOL
 
 echo "Install Depdendencies"
 pip install --upgrade pip
+pip install wheel
 pip install jupyterlab widgetsnbextension jupyter-jsmol nbconvert jupyterlab_latex
 pip install z3-solver pwntools pycryptodome
 pip install Pebble scikit-learn tensorflow
@@ -39,13 +44,12 @@ sage -pip install pwntools z3-solver pycryptodome
 echo "Setup Jupyter"
 echo 'export PWNLIB_NOTERM=1' >> ~/.bashrc #used to enable pwntools support
 source ~/.bashrc
-/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install @kaggle/jupyterlab
 /home/vagrant/.pyenv/versions/3.9.10/bin/jupyter kernelspec install --user /home/vagrant/SageMath/local/share/jupyter/kernels/sagemath
 #themes
-/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install base16-mexico-light
-/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install base16-monokai
-/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install base16-gruvbox-dark
-/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install base16-one-dark
+/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install @arbennett/base16-mexico-light
+/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install @arbennett/base16-monokai
+/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install @arbennett/base16-gruvbox-dark
+/home/vagrant/.pyenv/versions/3.9.10/bin/jupyter labextension install @arbennett/base16-one-dark
 #tabnine
 pip install jupyter-tabnine --user
 /home/vagrant/.pyenv/versions/3.9.10/bin/jupyter nbextension install --py jupyter_tabnine --user
