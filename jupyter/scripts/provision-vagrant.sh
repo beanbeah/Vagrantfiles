@@ -4,7 +4,7 @@ echo "Install system requirements"
 sudo sed -i 's|http://archive.ubuntu.com|http://mirror.0x.sg|g' /etc/apt/sources.list
 apt-get --quiet update
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-apt-get install -y curl git libssl-dev libffi-dev nodejs
+apt-get install -y curl git libssl-dev libffi-dev nodejs build-essential
 
 echo "Install pyenv requirements"
 apt-get install -y make build-essential libssl-dev zlib1g-dev \
