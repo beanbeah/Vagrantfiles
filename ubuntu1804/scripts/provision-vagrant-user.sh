@@ -29,7 +29,7 @@ echo "Tools"
 cd /home/vagrant/
 mkdir tools
 cd tools
-git clone https://github.com/dbsqwerty123/volatility--custom.git
+git clone https://github.com/beanbeah/volatility--custom.git
 cd volatility--custom
 pyenv local 2.7.18
 cd ..
