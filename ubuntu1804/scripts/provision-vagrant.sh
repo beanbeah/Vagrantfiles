@@ -41,3 +41,42 @@ ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 echo "Install others"
 apt-get install -y aircrack-ng foremost pngcheck libimage-exiftool-perl outguess steghide stegsnow
 apt-get install -y texlive-latex-extra texlive-xetex latexmk dvipng default-jdk ffmpeg libavdevice-dev coinor-cbc coinor-libcbc-dev pari-gp2c libigraph-dev libisl-dev libnauty-dev libxml2-dev lrslib ninja-build libxml-libxslt-perl libxml-writer-perl libxml2-dev libperl-dev libfile-slurp-perl libjson-perl libsvg-perl libterm-readkey-perl libterm-readline-gnu-perl libmongodb-perl libterm-readline-gnu-perl texlive-full ffmpeg imagemagick
+
+echo "Setup gdbenv"
+cat >/usr/local/bin/gdbenv <<EOL
+#!/bin/bash
+printf "Please choose GDB plugin\n1) Peda\n2) GEF\n3) pwndbg\nGDB Vanila (Default)\n\n"
+read -p "Choice: " num
+printf "Multi-arch? \n"
+read -p "Yes [y] / No [n]: " multi
+if [multi == "y"]
+then
+        command=gdb-multiarch
+else
+        command=gdb
+fi
+
+
+clear
+case $num in
+
+        1)
+                printf "Peda loaded\n"
+                exec $command -q -ex init-peda "$@"
+                ;;
+        2)
+                printf "GEF loaded\n"
+                exec $command -q -ex init-gef "$@"
+                ;;
+        3)
+                printf "pwndbg loaded\n"
+                exec $command -q -ex init-pwndbg "$@"
+                ;;
+        *)
+                printf "GDB Vanila loaded\n"
+                exec $command -q
+                ;;
+esac
+EOL
+
+sudo chmod +x /usr/local/bin/gdbenv
