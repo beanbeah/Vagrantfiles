@@ -22,7 +22,7 @@ pyenv global 3.9.10
 echo "Install Depdendencies"
 pip install --upgrade pip
 pip install wheel
-pip install z3-solver pwntools pycryptodome capstone ropgadget stegoveritas xortool
+pip install z3-solver pwntools pycryptodome capstone ropgadget stegoveritas xortool keystone-engine ropper 
 stegoveritas_install_deps
 
 echo "Tools"
@@ -32,6 +32,7 @@ cd tools
 git clone https://github.com/beanbeah/volatility--custom.git
 cd volatility--custom
 pyenv local 2.7.18
+pip install pycryptodome distorm3 construct
 cd ..
 git clone https://github.com/volatilityfoundation/volatility3.git
 git clone https://github.com/keyunluo/pkcrack
@@ -61,7 +62,7 @@ cd pwndbg
 ./setup.sh
 cd ..
 mv pwndbg pwndbg-src
-git clone https://github.com/longld/peda.git ~/peda
+git clone https://github.com/longld/peda.git /home/vagrant/tools/peda
 wget -q -O gdbinit-gef.py https://github.com/hugsy/gef/raw/master/gef.py
 cd /home/vagrant/
 cat >.gdbinit <<EOL
@@ -86,49 +87,15 @@ document init-gef
 Initializes GEF (GDB Enhanced Features)
 end
 EOL
-sudo cat >/usr/bin/gdbenv <<EOL
-#!/bin/bash
-printf "Please choose GDB plugin\n1) Peda\n2) GEF\n3) pwndbg\nGDB Vanila (Default)\n\n"
-read -p "Choice: " num
-printf "Multi-arch? \n"
-read -p "Yes [y] / No [n]: " multi
-if [multi == "y"]
-then
-        command=gdb-multiarch
-else
-        command=gdb
-fi
 
-
-clear
-case $num in
-
-        1)
-                printf "Peda loaded\n"
-                exec $command -q -ex init-peda "$@"
-                ;;
-        2)
-                printf "GEF loaded\n"
-                exec $command -q -ex init-gef "$@"
-                ;;
-        3)
-                printf "pwndbg loaded\n"
-                exec $command -q -ex init-pwndbg "$@"
-                ;;
-        *)
-                printf "GDB Vanila loaded\n"
-                exec $command -q
-                ;;
-esac
-EOL
-sudo chmod +x /usr/bin/gdbenv
 
 echo "Install SageMath"
+cd /home/vagrant/tools
 wget https://mirrors.tuna.tsinghua.edu.cn/sagemath/linux/64bit/sage-9.4-Ubuntu_18.04-x86_64.tar.bz2
 tar -xvf sage-9.4-Ubuntu_18.04-x86_64.tar.bz2
 cd SageMath
 timeout 2m ./sage
-sudo ln -s /home/vagrant/SageMath/sage /usr/local/bin/sage
+sudo ln -s /home/vagrant/tools/SageMath/sage /usr/local/bin/sage
 sudo rm -rf sage-9.4-Ubuntu_18.04-x86_64.tar.bz2
 source ~/.bashrc
 
