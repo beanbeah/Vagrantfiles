@@ -35,7 +35,17 @@ pyenv local 2.7.18
 pip install pycryptodome distorm3 construct
 cd ..
 git clone https://github.com/volatilityfoundation/volatility3.git
-
+git clone https://github.com/kimci86/bkcrack.git
+cd bkcrack
+cmake -S . -B build -DCMAKE_INSTALL_PREFIX=install
+cmake --build build --config Release
+cmake --build build --config Release --target install
+cd /home/vagrant/tools
+git clone https://github.com/keyunluo/pkcrack
+mkdir pkcrack/build
+cd pkcrack/build
+cmake ..
+make
 
 echo "Installing Patchelf"
 cd /home/vagrant/tools
