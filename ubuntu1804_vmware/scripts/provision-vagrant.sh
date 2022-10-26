@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Install system requirements"
-sudo sed -i 's|http://archive.ubuntu.com|http://mirror.0x.sg|g' /etc/apt/sources.list
+sudo sed -i 's|http://us.archive.ubuntu.com|http://mirror.0x.sg|g' /etc/apt/sources.list
 apt-get --quiet update
 apt-get install -y curl git libssl-dev libffi-dev libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev ruby-full
 
