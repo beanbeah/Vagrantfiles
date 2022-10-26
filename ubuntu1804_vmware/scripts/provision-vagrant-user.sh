@@ -69,7 +69,7 @@ cd pwndbg
 cd ..
 mv pwndbg pwndbg-src
 git clone https://github.com/longld/peda.git /home/vagrant/tools/peda
-wget -q -O gdbinit-gef.py https://github.com/hugsy/gef/raw/master/gef.py
+wget -O gdbinit-gef.py -q https://gef.blah.cat/py
 cd /home/vagrant/
 cat >.gdbinit <<EOL
 define init-peda
