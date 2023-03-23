@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Install system requirements"
-sudo sed -i 's|http://us.archive.ubuntu.com|http://mirror.0x.sg|g' /etc/apt/sources.list
+sudo sed -i 's|http://us.archive.ubuntu.com|http://sg.archive.ubuntu.com|g' /etc/apt/sources.list
 apt-get --quiet update
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 apt-get install -y curl git libssl-dev libffi-dev nodejs build-essential
